@@ -1,4 +1,5 @@
 use reqwest::blocking::Client;
+use reqwest::blocking::Client;
 use serde_json::json;
 use serde::Deserialize;
 use std::io;
@@ -10,6 +11,7 @@ struct ResponseItem {
     name: String,
 }
 
+fn main() -> Result<(), Box<dyn std::error::Error>> {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // get username from user input
     let mut input = String::new();
@@ -63,8 +65,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Sent GET request to Mojang
     let mojang_url = format!("https://api.mojang.com/users/profiles/minecraft/{}", input);
     let res = client.get(&mojang_url).send()?;
+    let res = client.get(&mojang_url).send()?;
 
     // Get response from Mojang
+    let response_text_mojang = res.text()?;
     let response_text_mojang = res.text()?;
     println!("Response From Mojang API: {:?}\n", response_text_mojang);
 
